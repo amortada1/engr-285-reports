@@ -1,0 +1,151 @@
+\documentclass[12pt]{iopart} % Document class declaration
+
+% package "imports"
+\usepackage{graphicx}
+\usepackage{IEEEtrantools}
+
+% Custom macros
+\gdef\mcm{r@{.}l@{ ± }r@{.}l} % Multi Column Measurement; Used for decimal aligning & ± aligning
+\gdef\mch#1{\multicolumn{4}{l}{#1}} % Multi Column Header; Used for decimal aligning & ± aligning
+\gdef\mcmnd{r@{ ± }l} % Multi Column Measurement No Decimal; Used for ± aligning when the values don't need a decimal point
+\gdef\mchnd#1{\multicolumn{2}{l}{#1}} % Multi Column Header No Decimal; Used for  ± aligning when the values don't need a decimal point
+\gdef\sci#1#2{#1 \times 10^{#2}}
+\gdef\units#1{~\mathrm{#1}}
+
+%%%%%%%%%%%%%%%%%%%% Document Starts %%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%
+\title{Title}
+\author{Ali Mortada}
+\vspace{10pt}
+\begin{indented}
+  \item[]Mt.~San Antonio College, ENGR 285, CRN 43464
+  \item[]Date
+\end{indented}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%% Purpose %%%%%%%%%%%%%%%%%%%%
+\section{Purpose and Hypothesis}
+
+The purpose of the experiment is \emph{blah blah blah}.
+
+%%%%%%%%%%%%%%%%%%%% Materials %%%%%%%%%%%%%%%%%%%%
+\section{Materials}
+
+\begin{itemize}
+\item
+  Thingamajig 1
+\item
+  Thingamajig 2
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%% Procedures %%%%%%%%%%%%%%%%%%%%
+\section{Procedures}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Tingaling 1
+
+  \begin{itemize}
+    \item
+      Mini Tingaling 1
+    \item
+      Mini Tingaling 2
+  \end{itemize}
+\item
+  Tingaling 2
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%% Results %%%%%%%%%%%%%%%%%%%%
+\section{Results}
+
+Table \ref{tab:short_cable_properties} contains the measured properties of the short fiber optic cable.
+$l$ is the length of that cable, and $m$ is the mass of that cable.
+
+\begin{table}[htbp]
+\caption{\label{tab:short_cable_properties}
+Short Fiber Optic Cable Properties
+}
+\begin{indented}\lineup\item[]\begin{tabular}{@{}cr@{ ± }l}
+\br
+  Property & \multicolumn{2}{c}{Measurement} \\
+\mr
+  $l$      & 148.8 & 0.2 mm \\
+  $m$      & 0.57 & 0.01 g  \\
+\br
+\end{tabular}\end{indented}\end{table}
+
+Table \ref{tab:main_measurements} contains the main measurements made for the various colors of light and long fiber optic cables used.
+$\lambda$ is the peak wavelength output by the LED used.
+$M$ is the mass of the long fiber optic cable used.
+$t$ is the travel time for the light pulse to pass through the long fiber optic cable.
+
+\begin{table}[htbp]
+\caption{\label{tab:main_measurements}
+Main Measurements \\
+Note: UTD means ``unable to detect''
+}
+\begin{indented}\lineup\item[]\begin{tabular}{@{}lll\mcm\mcm}
+\br
+  Trial & Color    & $\lambda$ (nm) & \mch{$M$ (g)}   & \mch{$t$ (ns)} \\
+\mr
+  1     & Red      & 645 & 75&10 & 0&01     & 99&85 & 1&53 \\
+  2     & Green    & 522 & 75&10 & 0&01     & \multicolumn{4}{l}{UTD through short cable} \\
+  3     & Blue     & 470 & 75&10 & 0&01     & \multicolumn{4}{l}{UTD through short cable} \\
+  4     & Infrared & 940 & 75&10 & 0&01     & \multicolumn{4}{l}{UTD through long cable} \\
+  5     & Infrared & 940 & 37&08 & 0&01     & \multicolumn{4}{l}{UTD through long cable} \\
+  6     & Infrared & 940 &  3&75 & 0&01     & \multicolumn{4}{l}{UTD clearly through long cable} \\
+  7     & Infrared & 940 &  1&87 & 0&01     & \multicolumn{4}{l}{UTD clearly through long cable} \\
+\br
+\end{tabular}\end{indented}\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%% Uncertainty and Equations %%%%%%%%%%%%%%%%%%%%
+\section{Uncertainty and Equations}
+
+The length of the short cable ($l$) was measured using a caliper.
+It had a labeled uncertainty of 0.2 mm, so that was used as the uncertainty.
+The masses ($m$ and $M$) were measured using an electronic balance that reported values to within $0.01 \units{g}$, so that was used as the uncertainty.
+
+The material the fiber optic cable is made of has an index of refraction ($n$) of 1.49, according to the datasheet.
+Thus, light slows down when traveling in the cable compared to the speed of light in a vacuum ($c$, accepted value of $\sci{3.00}{8} \units{m/s}$).
+Equation \ref{eq:index_of_refraction} can be used to calculate the speed of light in the cable ($v$).
+\begin{IEEEeqnarray}{rCl}
+  v & = & \frac{c}{n} \label{eq:index_of_refraction}
+\end{IEEEeqnarray}
+
+The length of the long fiber optic cable ($L$) was determined indirectly based on its mass ($M$) and the linear density of that type of cable ($\mu$).
+The linear density can be calculated using equation \ref{eq:linear_density}, which uses the more easily measured mass ($m$) and length ($l$) of the short fiber optic cable.
+\begin{IEEEeqnarray}{rCl}
+  \mu & = & \frac{m}{l} \label{eq:linear_density}
+\end{IEEEeqnarray}
+  From there, the length of the long cable $L$ can be calculated using equation \ref{eq:long_cable_length}.
+\begin{IEEEeqnarray}{rCl}
+  L & = & \frac{M}{\mu} \label{eq:long_cable_length} \\
+    & = & \frac{Ml}{m} \nonumber
+\end{IEEEeqnarray}
+
+%%%%%%%%%%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+
+We conclude that roses are red and violets are blue.
+
+%%%%%%%%%%%%%%%%%%%% Citations %%%%%%%%%%%%%%%%%%%%
+\section{Citations}
+
+\begin{thebibliography}{9}
+
+\bibitem{reference_name}
+  Mister Man,
+  \textit{Title of Reference},
+  Publisher,
+  Year,
+  Pages or Hyperlink.
+
+\end{thebibliography}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%% Document Ends %%%%%%%%%%%%%%%%%%%%
