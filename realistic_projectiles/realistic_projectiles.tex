@@ -19,7 +19,7 @@
 
 %%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%
 \title{Realistic Projectiles}
-\author{Ali Mortada, Xavier Valencia, James Phommachanh, Wes Cochran}
+\author{Ali Mortada, Xavier Valencia, James Phommachanh}
 \vspace{10pt}
 \begin{indented}
   \item[]Mt.~San Antonio College, ENGR 285, CRN 43464
@@ -177,7 +177,7 @@ With quadratic drag, we expect the range to decrease since drag increases with i
 This is why we see the "squished" shape of the trajectory.
 Thus, for the greatest range we would look for a trajectory where the amount of drag is minimized, which is when the arc length is the shortest.
 
-When the projectile's range is graphed against the initial angle with respect to the horizontal, we find that the shape of the curve is parabolic and concave down.
+When the projectile's range is graphed against the initial angle with respect to the horizontal, we find that the shape of the curve is parabolic and concave down, as seen in Fig. \ref{fig:figure7}.
 
 \begin{figure}[h!tbp]
   \begin{center}
@@ -188,6 +188,45 @@ When the projectile's range is graphed against the initial angle with respect to
   \end{center}
 \end{figure}
 
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.6\textwidth]{figure9.png}
+  \caption{\label{fig:figure9}
+  Range of the projectile as a function of launch speed.
+  }
+  \end{center}
+\end{figure}
+
+The firing range as a function of initial speed for various fixed firing angles is a logarithmic function. 
+We know that this is the case since a logarithmic function is the only function that is both concave and growing. 
+Generally speaking, this makes sense, as the range before terminal velocity has a high rate of change, and the amount of effort required to increase the range is pretty minimal. 
+Above the terminal velocity, we notice that the rate of change on the function is much lower than the rate of change below terminal velocity. 
+This can be reasoned by analyzing Fig. \ref{fig:figure10}.
+
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.6\textwidth]{figure10.png}
+  \caption{\label{fig:figure10}
+  Fixed launch angle with increasing initial speed, mostly above terminal velocity. Blue represents $v_0 = 1$, red represents $v_0 = 5$, green represents $v_0 = 10$, cyan represents $v_0 = 15$, and purple represents $v_0 = 20$.
+  }
+  \end{center}
+\end{figure}
+
+From Fig. \ref{fig:figure10}, we see that the projectile goes in a straight line, until the drag force has reduced the projectile's velocity to be small enough that gravity overpowers the projectile's motion. 
+We know that this is the case since we can see the trajectories overlap. 
+The only difference between these projectiles is their initial speeds, so we can infer that higher initial speeds lead to longer ranges, with diminishing returns as the projectile is launched above terminal velocity. 
+
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.6\textwidth]{figure11.png}
+  \caption{\label{fig:figure11}
+  Fixed launch angle with increasing initial speed, with some below terminal velocity and some above. Blue represents $v_0 = 0.4$, red represents $v_0 = 0.8$, green represents $v_0 = 1$, cyan represents $v_0 = 2$, and purple represents $v_0 = 4$.
+  }
+  \end{center}
+\end{figure}
+
+From \ref{fig:figure11}, we noticed that the range more than doubled when multiplying the initial velocity by 2 when under terminal velocity. 
+When observing the trajectories of those projectiles with initial velocities above terminal, we found that the range does increase, but behaves in the manner as mentioned prior, where the higher the projectile's initial speed, the further it goes. 
 
 \pagebreak
 
