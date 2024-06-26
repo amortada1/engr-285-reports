@@ -30,15 +30,48 @@
 %%%%%%%%%%%%%%%%%%%% Objective 1 %%%%%%%%%%%%%%%%%%%%
 \section{Objective 1: Encoding Program}
 
-This is the section for the first objective. \newline
+%What to talk about:
+%\begin{itemize}
+     %What \verb|createPureToneData()| does
+     %What \verb|toneList| is
+    %What the for loop does
+%\end{itemize}
 
-What to talk about:
-\begin{itemize}
-    \item What \verb|createPureToneData| does
-    \item What \verb|toneList| is
-    \item What the for loop does
-\end{itemize}
+The short and sweet explanation as to what the encoding program does is that it makes a \verb|.wav| file that contains a series of tones that are made from a list along with a series of pauses so that the original list of numbers fed into the program cannot be read without the proper decoding program.
 
+From the top of the code, we import a few libraries to perform some math functions, then convert those outputs into \verb|.wav| files. 
+We make a file name for the \verb|.wav| output, then a list of numbers that are between 0-9 to input into the program. 
+The \verb|sampleRate| variable is the step size of the wave file, so a higher sample rate would allow for a more accurate replication of that particular frequency. 
+There is a limit to the frequencies a human can hear, so we will not change this value. 
+The variable \verb|soundLevel| represents the amplitude of the frequencies produced, so as the name of the variable indicates, a higher value will result in a higher sound level, with the contra-positive being true as well. 
+The variable \verb|pauseLength| is there to help encode the frequencies so that you cannot properly playback the \verb|.wav| file.
+
+We then create a function that will take in a frequency and create an array that loops for as long as the iterating variable is less than the sample rate value with the iterator incrementing at the end of each loop.
+The array is filled with a series of points that are representative of a sine wave of the input frequency. 
+We do this for a series of frequencies and store them in variables, then the different frequencies are summed into a new list so that they correspond to the table given in the order of 0-9. 
+
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.6\textwidth]{images/Capture.PNG}
+  \caption{\label{fig: Keypad Tones} 
+  Keypad tones provided.
+  }
+  \end{center}
+\end{figure}
+
+This list is essentially creating new tones by using constructive wave interference and associating a number to this new tone. 
+This will be called \verb|toneList| as provided. 
+Now that we have a way to create a unique tone for each input and represent it in a list, we can now reference our \verb|toneList| with the inputs of our \verb|numberList|. 
+We will make a new array called \verb|soundData| that adds the tone list data along with pauses between each tone. 
+This will be done in a for loop for the range of the \verb|numberList|. This loops for however long the number list is, but it is noteworthy that we should increase the value of \verb|soundLength| if we increase the length of the \verb|numberList|.
+
+Once that final for loop is done, we have all of our data to copy to the \verb|.wav| file, the IDE opens the \verb|.wav| file created prior and sets some parameters. 
+These parameters include \verb|nchannels|, which is the number of audio channels. 
+I don’t know how I feel about Dolby Atomos keypad tones. 
+The variable \verb|sampwidth| is the number of bytes used when writing data to the \verb|.wav| file, we have 2 bytes so it would be 16 bits. 
+The variable \verb|framerate| is \verb|sampleRate| but converted to an integer. The variable \verb|nframes| represents the amount of steps that the \verb|.wav| file will have, or how long it will be. The line \verb|comptype = “NONE”| tells the program not to compress the output file, and \verb|compname| is a description of the compression type. 
+We set the parameters using a wave library function, then we use a for loop to write all of the data we have using a different wave library function.
+Finally, it closes the file and prints a message to the terminal indicating that the program has successfully written to the output file.
 
 % figures look like this and go into the images folder
 %\begin{figure}[h!tbp]
@@ -51,61 +84,104 @@ What to talk about:
 %  \end{center}
 %\end{figure}
 
-\pagebreak
 
 %%%%%%%%%%%%%%%%%%%% Objective 2 %%%%%%%%%%%%%%%%%%%%
 \section{Objective 2: Slicing Data}
 
-This is the section for the second objective. \newline
+%%What to talk about:
+%\begin{itemize}
+ %   \item %Function has to divide the data into equally sized parts which depends on the number of inputs
+ %   \item %Iterates through the save data with a step size of the slice size
+  %  \begin{itemize}
+   %     \item %%Uses another nested for loop that only adds signals that are not pauses (signal is not equal to 0)
+   %     \item %%If a signal is found, it is added to the data list that the function returns%%
+    %\end{itemize}
+%\end{itemize}
 
-What to talk about:
-\begin{itemize}
-    \item Function has to divide the data into equally sized parts which depends on the number of inputs
-    \item Iterates through the save data with a step size of the slice size
-    \begin{itemize}
-        \item Uses another nested for loop that only adds signals that are not pauses (signal is not equal to 0)
-        \item If a signal is found, it is added to the data list that the function returns
-    \end{itemize}
-\end{itemize}
+The \verb|slice_data()| function first divides the input data into equally sized parts, which depends on the number of inputs -- this is stored in a variable called \verb|slice_size|.
+Note that if the number of inputs changes, we must change the code so that it divides the input number into the correct number of equal parts.
+Figure \ref{fig:slice_graph} shows how the data is divided into different slices.
 
-\pagebreak
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.6\textwidth]{images/slice_graph.png}
+  \caption{\label{fig:slice_graph}
+  Slice graph with input [1, 1, 2, 1, 0, 1].
+  The data is divided into six equal parts, regardless of what the input values actually are.
+  }
+  \end{center}
+\end{figure}
 
+The function then contains a for-each loop that iterates through the length of \verb|save_data| with a step size of \verb|slice_size|.
+This loop contains another nested loop that checks each data point within the slice.
+If the signal is not a pause, it is added to the data list that is returned by the function, but if it is, it is skipped over. 
+
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.9\textwidth]{images/slice_data().png}
+  \caption{\label{fig:slice_data()}
+  Code snippet for the slice\_data() function.
+  }
+  \end{center}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%% Objective 3 %%%%%%%%%%%%%%%%%%%%
 \section{Objective 3: Calculating Approximate Fourier Coefficients}
 
-This is the section for the third objective. \newline
+Since decoding the DTMF signals requires Fourier analysis, the Fourier coefficients can be approximated using the different decoded frequencies. 
+Recall the Fourier coefficients for the sine and cosine basis:
 
-What to talk about:
-\begin{itemize}
-    \item T is the length of the slice we are analyzing
-    \item Integral is just a sum, so we can approximate it by multiplying each data point in the slice with its respective trig function
-    \begin{itemize}
-        \item $t$ is the data point divided by the frame rate
-    \end{itemize}
-    \item Coefficient returned is the Euclidean norm of $a$ and $b$
-\end{itemize}
+\begin{equation}
+    a_n = \frac{2}{T}\int_0^T f(t)cos(\frac{2\pi n}{T}t)\;\mathrm{d}t
+\end{equation}
 
-\pagebreak
+\begin{equation}
+    b_n = \frac{2}{T}\int_0^T f(t)sin(\frac{2\pi n}{T}t)\;\mathrm{d}t
+\end{equation}
+
+The coefficients in the program correlate to each of these Fourier bases. 
+Thus, an approximation of the coefficients can be calculated by taking the summation of each frequency from the sliced data for the decoded sound signal. 
+The period for each Fourier Basis ($T$), is the length of the decoded and sliced frequencies. 
+Then for each data point ($n$), the frequencies ($t$) within the trigonometric part of the basis are divided by the frame rate -- which in this case is the period ($T$). 
+In the program, this simplifies to: 
+
+\begin{equation}
+    a_n = \frac{2}{T}\sum_{0}^{T} \mathrm{frequency} * cos(\frac{2\pi * \mathrm{data point} }{\mathrm{framerate}} * \mathrm{frequency})
+\end{equation}
+
+\begin{equation}
+    b_n = \frac{2}{T}\sum_{0}^{T} \mathrm{frequency} * sin(\frac{2\pi * \mathrm{data point}}{\mathrm{framerate}} * \mathrm{frequency})
+\end{equation}
+
+This results in the approximation of the Fourier coefficients for the DTMF signaling for each of the Fourier bases. The function returns the Euclidean norm of the Fourier basis in a plane representing each of the bases.
+
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.8\textwidth]{images/calculate_coefficient().png}
+  \caption{\label{fig:calculate_coefficient()}
+  Snippet of code for the calculate\_coefficient() function.
+  }
+  \end{center}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%% Objective 4 %%%%%%%%%%%%%%%%%%%%
 \section{Objective 4: Outputting Decoded Digits}
 
-This is the section for the fourth objective. \newline
+To output the decoded digits, a list of the Fourier coefficients of the decoded signal list can be iterated for each of the respective high and low frequencies of the program. 
+Now for each signal from the data list, there is a list of low and high Fourier coefficients. 
+The max of each of the coefficients represents the true occurrence of the high and low frequencies in the data signal. 
+Thus, we can store the instances of these max coefficients for each signal to decipher the decoded digits. 
+Once we have a list of where these instances occur, we find an instance in this list that correlates to the decoded digit originally in the decoded list of numbers. 
+To check if an instance exists to the decoded list, we only stored digits that did not return -1 when put into the \verb|decode_freqs()| function. 
 
-What to talk about:
-\begin{itemize}
-    \item Iterate through each data point in the sliced data
-    \begin{itemize}
-        \item Create a list of low coefficients using the \verb|calculate_coefficient| function and passing in the data point and each low frequency
-        \item Repeat for the high coefficients
-    \end{itemize}
-    \item Find the low frequency from the index of the first appearance of the maximum low coefficients value
-    \item Repeat for the high frequency
-    \item Pass in the previously found low and high frequencies into \verb|decode_freqs|, and if it is not -1, append it to the list of stored numbers
-\end{itemize}
-
-\pagebreak
+\begin{figure}[h!tbp]
+  \begin{center}
+ \item[]\includegraphics[width=0.9\textwidth]{images/main_for_loop.png}
+  \caption{\label{fig:main_for_loop}
+  The program's main for loop.
+  }
+  \end{center}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%% Extension %%%%%%%%%%%%%%%%%%%%
 \section{Extension: Handling Alphabetical Messages}
